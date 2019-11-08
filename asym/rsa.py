@@ -2,7 +2,8 @@ from base64 import b64encode, b64decode
 from pyasn1.codec.der.encoder import encode as der_encoder
 from asn1 import pkcs1
 from util.crypto import is_prime_v3 as is_prime
-from util.crypto import generate_prime_number, egcd
+from util.crypto import recursive_egcd as egcd
+from util.crypto import generate_prime_number
 import math
 
 
@@ -52,22 +53,15 @@ def gen_rsa_v2(size):
     return(e, n, d)
 
 
-def gen_rsa_v3(size):
+def gen_private_key(size):
     '''
     Generates an RSA key pair using the specified bit size.
-    Example ASN1 for PKCS1 Private Key
-    RSAPrivateKey ::= SEQUENCE {
-      version           Version,
-      modulus           INTEGER,  -- n
-      publicExponent    INTEGER,  -- e
-      privateExponent   INTEGER,  -- d
-      prime1            INTEGER,  -- p
-      prime2            INTEGER,  -- q
-      exponent1         INTEGER,  -- d mod (p-1)
-      exponent2         INTEGER,  -- d mod (q-1)
-      coefficient       INTEGER,  -- (inverse of q) mod p
-      otherPrimeInfos   OtherPrimeInfos OPTIONAL
-    }
+
+    Generates a RSA private key
+
+    Args:
+        size -- int -- the bitsize of the keypair
+    return a UTF-8 formatted private key
     '''
     # check that size is an int
     if isinstance(size, int) is False:
@@ -102,10 +96,8 @@ def gen_rsa_v3(size):
     asn1_key['exponent1'] = 0
     asn1_key['exponent2'] = 0
     asn1_key['coefficient'] = 0
-    print(asn1_key)
     der = der_encoder(asn1_key)
-    print(der)
     b64 = b'-----BEGIN RSA PRIVATE KEY-----\n'
     b64 += b64encode(der)
     b64 += b'\n-----END RSA PRIVATE KEY-----'
-    print(str(b64, 'utf-8'))
+    return str(b64, 'utf-8')

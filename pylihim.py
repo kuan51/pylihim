@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import argparse
-from asym.rsa import gen_rsa_v3 as gen_rsa
+from asym.rsa import gen_private_key as gen_rsa_private_key
 
 
 def pylihim():
@@ -26,7 +26,7 @@ def pylihim():
     if args.cmd == 'rsa':
         if args.gen_key:
             keysize = int(args.gen_key)
-            print(gen_rsa(keysize))
+            print(gen_rsa_private_key(keysize))
 
 
 # Run application
