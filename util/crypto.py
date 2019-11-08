@@ -3,10 +3,6 @@ from random import randrange, getrandbits
 import sys
 
 
-# set limit on recursive operations
-sys.setrecursionlimit(1000000)
-
-
 def is_prime_v1(n):
     '''
     Test if a number is prime
@@ -144,7 +140,7 @@ def iterative_egcd(a, b):
     220 = 88 * 2 + 44
     88 = 44 * 2 + 0 <- GCD = 44
 
-    Performs the Extended Euclidean Algorithm
+    Performs a Iterative Extended Euclidean Algorithm
     https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Extended_Euclidean_algorithm
 
     Args:
@@ -177,6 +173,8 @@ def recursive_egcd(a, b):
         new_x  --  a * new_x + b * old_x = g = 1
         old_x  --  a * new_x + b * old_x = g = 1
     '''
+    # set limit on recursive operations
+    sys.setrecursionlimit(1000000)
     if a == 0:
         return b, 0, 1
     else:
