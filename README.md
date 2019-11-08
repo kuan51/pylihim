@@ -1,5 +1,5 @@
 # pylihim
-A python cryptography api. **This code is _not secure_ and not meant for use in production.** Its intended as a educational resource to demystify cryptography.
+A python cryptography api. **This code is _not secure_ and not meant for use in production.** Its intended as a educational resource to demystify cryptography. The projects name is based on the Filipino word "lihim" which means "secret." A perfect fit as cryptography is the art of exchanging secrets.
 
 ## Installation
 
