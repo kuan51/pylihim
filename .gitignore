@@ -1,4 +1,5 @@
 # Custom additions
+demo/
 venv/
 migrations
 *.bak

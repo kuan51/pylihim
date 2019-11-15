@@ -33,3 +33,17 @@ class RSAPrivateKey(Sequence):
         NamedType('exponent2', Integer()),
         NamedType('coefficient', Integer())
     )
+
+
+class RSAPublicKey(Sequence):
+    '''
+    Example ASN1 for PKCS1 Public Key
+    RSAPublicKey ::= SEQUENCE {
+        modulus           INTEGER,  -- n
+        publicExponent    INTEGER   -- e
+    }
+    '''
+    componentType = NamedTypes(
+        NamedType('modulus', Integer()),
+        NamedType('publicExponent', Integer()),
+    )

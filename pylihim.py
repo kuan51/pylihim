@@ -1,6 +1,8 @@
 #!/usr/bin/python
 import argparse
 from asym.rsa import gen_private_key as gen_rsa_private_key
+from asym.rsa import gen_public_key as gen_rsa_public_key
+
 
 
 def pylihim():
@@ -13,7 +15,8 @@ def pylihim():
 
     # Argparse RSA Sub Parser
     parser_cert = subparsers.add_parser('rsa')
-    parser_cert.add_argument("--gen-key", help="Generate a RSA keypair with the specified bit size")
+    parser_cert.add_argument("--gen-priv-key", help="Generate a RSA keypair with the specified bit size")
+    parser_cert.add_argument("--gen-pub-key", help="Generate a RSA public key from a private key")
 
     # Parse argument list
     args = parser.parse_args()
@@ -24,9 +27,14 @@ def pylihim():
 
     # RSA subparser
     if args.cmd == 'rsa':
-        if args.gen_key:
-            keysize = int(args.gen_key)
-            print(gen_rsa_private_key(keysize))
+
+        # If --gen-priv-key
+        if args.gen_priv_key:
+            print(gen_rsa_private_key(args.gen_priv_key))
+
+        # If --gen-pub-key
+        if args.gen_pub_key:
+            print(gen_rsa_public_key(args.gen_pub_key))
 
 
 # Run application
